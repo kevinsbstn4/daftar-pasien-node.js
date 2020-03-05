@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <title>Data Siswa</title>
+  </head>
+  <body>
+        <div style="margin-top: 100px; width: 90%; margin-left: 30px;">
+             <button
+              style="width: 20%;"
+              type="button"
+              class="btn btn-danger btnTambahData mt-1"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              data-zurl="<?= BASEURL; ?>"
+            >
+              Tambah Data Siswa
+            </button>
+          <table style="margin-top: 40px;" class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nis</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">Umur</th>
+                <th scope="col">Nomor HP</th>
+                <th scope="col">Kelas</th>
+                <th scope="col">Pelajaran</th>
+                <th scope="col">Kelamin</th>
+                <th scope="col">Action</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="databody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Tambah Mahasiswa
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="nis">Nomor Induk Siswa</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nis"
+                    placeholder="Masukkan Nomor Induk Siswa"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nama">Nama</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nama"
+                    placeholder="Masukkan Nama"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="alamat">Alamat</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="alamat"
+                    placeholder="Masukkan Alamat"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="hobu">Umur</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="umur"
+                    placeholder="Masukkan Hobi"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="hobu">Nomor Hp</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="no_hp"
+                    placeholder="Masukkan Hobi"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="hobu">kelas</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="kelas"
+                    placeholder="Masukkan Hobi"
+                    autocomplete="off"
+                  />
+                </div>
+                <label for="hobu">Pelajaran Disukai</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" id="pelajaran" aria-label="Checkbox for following text input" value="miskin">
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Matematika" readonly>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" id="pelajaran" aria-label="Checkbox for following text input" value="miskin">
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Bahasa Inggris" readonly>
+                  </div>
+                  <form id="myForm" action="POST">
+                  <!-- <p>Jenis Kelamin :</p> -->
+                  <div style="">
+                  <input type="text" class="form-control" id="kelamin" name="radioName" value="female" placeholder="Pilih Jenis Kelamin Dibawah :" disabled>
+                </div>
+
+                  <input type="radio" id="kelamin" name="radioName" value="male">
+                  <label for="male">male</label><br>
+
+                    <input type="radio" id="kelamin" name="radioName" value="female">
+                    <label for="female">Female</label><br>
+                    
+                    <input type="text" id="selvalue" readonly/>
+                  </form>
+
+                  <div>
+                    <label for="choosefile">Isi Foto Ijasah SMP</label>
+                    <input type="file" value="check" />
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="btn_save">
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<script>
+     
+    
+</script>
