@@ -138,28 +138,38 @@
                     autocomplete="off"
                   />
                 </div>
+                <!-- pelajaran -->
+              
+                <!-- mtk -->
                 <label for="hobu">Pelajaran Disukai</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <input type="checkbox" id="pelajaran" aria-label="Checkbox for following text input" value="miskin">
+                        <input class="chkbx" type="checkbox" aria-label="Checkbox for following text input" name="type" value="mtk">
                       </div>
                     </div>
                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Matematika" readonly>
                   </div>
+                  <!-- mtk end -->
+                  <!-- inggris -->
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <input type="checkbox" id="pelajaran" aria-label="Checkbox for following text input" value="miskin">
+                        <input class="chkbx" type="checkbox" aria-label="Checkbox for following text input" name="type" value="inggris">
                       </div>
                     </div>
                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Bahasa Inggris" readonly>
                   </div>
-                  <form id="myForm" action="POST">
+                  
+                  <input type="text" name="" id="selectedtext" readonly></input>
+                  <input type="text" name="" id="count" readonly />
+                  <!-- inggris end -->
+                  <!-- pelajaran end -->
+
+                  <form id="myForm" method="POST">
                   <!-- <p>Jenis Kelamin :</p> -->
-                  <div style="">
-                  <input type="text" class="form-control" id="kelamin" name="radioName" value="female" placeholder="Pilih Jenis Kelamin Dibawah :" disabled>
-                </div>
+                  
+                  <input type="text" class="form-control" id="kelamin" name="radioName" value="" placeholder="Pilih Jenis Kelamin Dibawah :" disabled>
 
                   <input type="radio" id="kelamin" name="radioName" value="male">
                   <label for="male">male</label><br>
@@ -203,7 +213,3 @@
   </body>
 </html>
 
-<script>
-     
-    
-</script>

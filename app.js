@@ -52,7 +52,7 @@ app.post("/api", (req, res) => {
     umur: req.body.umur,
     no_hp: req.body.no_hp,
     kelas: req.body.kelas,
-    pelajaran: req.body.pelajaran,
+    selectedtext: req.body.selectedtext,
     selvalue: req.body.selvalue
   };
   let sql;
@@ -72,8 +72,8 @@ app.post("/api", (req, res) => {
       req.body.no_hp +
       `', kelas='` +
       req.body.kelas +
-      `', pelajaran='` +
-      req.body.pelajaran +
+      `', selectedtext='` +
+      req.body.selectedtext +
       `', selvalue='` +
       req.body.selvalue +
       `'

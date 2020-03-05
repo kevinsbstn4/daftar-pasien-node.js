@@ -16,7 +16,7 @@ btnSave.addEventListener("click", async event => {
   const umur = document.getElementById("umur").value;
   const no_hp = document.getElementById("no_hp").value;
   const kelas = document.getElementById("kelas").value;
-  const pelajaran = document.getElementById("pelajaran").value;
+  const selectedtext = document.getElementById("selectedtext").value;
   const selvalue = document.getElementById("selvalue").value;
 
   let data = {
@@ -26,7 +26,7 @@ btnSave.addEventListener("click", async event => {
     umur: umur,
     no_hp: no_hp,
     kelas: kelas,
-    pelajaran: pelajaran,
+    selectedtext: selectedtext,
     selvalue: selvalue,
     action: action
   };
@@ -52,12 +52,27 @@ btnSave.addEventListener("click", async event => {
     $.alert("Data Berhasil dirubah!");
   }
 });
+
+$(document).ready(function() {
+  $(".chkbx").click(function() {
+    var text = "";
+    $(".chkbx:checked").each(function() {
+      text += $(this).val() + ",";
+    });
+    text = text.substring(0, text.length - 1);
+    $("#selectedtext").val(text);
+    var count = $("[type='checkbox']:checked").length;
+    $("#count").val($("[type='checkbox']:checked").length);
+  });
+});
+
 $(document).ready(function() {
   $("#myForm input").on("change", function() {
     var selvalue = $("[type='radio']:checked").val();
     $("#selvalue").val($("[type='radio']:checked").val());
   });
 });
+
 function showData(json) {
   let tr = "";
   $("#databody").html("");
@@ -72,7 +87,7 @@ function showData(json) {
     tr.append("<td>" + json[i].umur + "</td>");
     tr.append("<td>" + json[i].no_hp + "</td>");
     tr.append("<td>" + json[i].kelas + "</td>");
-    tr.append("<td>" + json[i].pelajaran + "</td>");
+    tr.append("<td>" + json[i].selectedtext + "</td>");
     tr.append("<td>" + json[i].selvalue + "</td>");
     tr.append(
       `
@@ -102,7 +117,7 @@ function showData(json) {
       document.getElementById("umur").value = "";
       document.getElementById("no_hp").value = "";
       document.getElementById("kelas").value = "";
-      document.getElementById("pelajaran").value = "";
+      document.getElementById("selectedtext").value = "";
       document.getElementById("selvalue").value = "";
 
       $("#exampleModalLabel").html("Tambah Data Siswa");
@@ -125,7 +140,7 @@ function showData(json) {
       document.getElementById("umur").value = json[0].umur;
       document.getElementById("no_hp").value = json[0].no_hp;
       document.getElementById("kelas").value = json[0].kelas;
-      document.getElementById("pelajaran").value = json[0].pelajaran;
+      document.getElementById("selectedtext").value = json[0].selectedtext;
       document.getElementById("selvalue").value = json[0].selvalue;
 
       $("#exampleModalLabel").html("Ubah Data Siswa");
