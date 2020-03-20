@@ -8,7 +8,7 @@ const conn = mysql.createConnection({
   host: "localhost",
   user: "kevin",
   password: "0000",
-  database: "3_March"
+  database: "daftar_pasien"
 });
 
 //connect ke database
@@ -23,7 +23,7 @@ app.use(express.static("public"));
 
 //Baca Semua Data
 app.get("/read", (req, res) => {
-  let sql = "SELECT * FROM tbl_siswa";
+  let sql = "SELECT * FROM list";
   let query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -35,7 +35,7 @@ app.get("/readbynis/:nis", async (req, res) => {
   const nis = req.params.nis;
   console.log(nis);
 
-  let sql = "SELECT * FROM tbl_siswa Where nis = " + nis + "";
+  let sql = "SELECT * FROM list Where nis = " + nis + "";
   let query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -47,35 +47,29 @@ app.post("/api", (req, res) => {
   let action = req.body.action;
   let data = {
     nis: req.body.nis,
-    nama: req.body.nama,
-    alamat: req.body.alamat,
-    umur: req.body.umur,
-    no_hp: req.body.no_hp,
-    kelas: req.body.kelas,
-    selectedtext: req.body.selectedtext,
-    selvalue: req.body.selvalue
+    nama_pasien: req.body.nama_pasien,
+    umur_pasien: req.body.umur_pasien,
+    asal_rs: req.body.asal_rs,
+    status: req.body.status,
+    asal_rumah: req.body.asal_rumah
   };
   let sql;
 
   if (action === "Simpan") {
-    sql = "INSERT INTO tbl_siswa SET ?";
+    sql = "INSERT INTO list SET ?";
   } else {
     sql =
-      `UPDATE tbl_siswa SET nama='` +
-      req.body.nama +
+      `UPDATE list SET nama_pasien='` +
+      req.body.nama_pasien +
       `', 
-    alamat='` +
-      req.body.alamat +
-      `',  umur='` +
-      req.body.umur +
-      `', no_hp='` +
-      req.body.no_hp +
-      `', kelas='` +
-      req.body.kelas +
-      `', selectedtext='` +
-      req.body.selectedtext +
-      `', selvalue='` +
-      req.body.selvalue +
+     umur_pasien='` +
+      req.body.umur_pasien +
+      `', asal_rs='` +
+      req.body.asal_rs +
+      `', status='` +
+      req.body.status +
+      `', asal_rumah='` +
+      req.body.asal_rumah +
       `'
     WHERE nis='` +
       req.body.nis +
@@ -95,7 +89,75 @@ app.get("/hapus/:nis", async (req, res) => {
   const nis = req.params.nis;
   console.log(nis);
 
-  let sql = `DELETE FROM tbl_siswa Where nis = '` + nis + `';`;
+  let sql = `DELETE FROM list Where nis = '` + nis + `';`;
+  let query = conn.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+///////////////////////////////////////////////DATA PERAWAT//////////////////////////////////
+
+//Baca Semua Data
+app.get("/read", (req, res) => {
+  let sql = "SELECT * FROM perawat";
+  let query = conn.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+//Baca Data Berdasarkan NIS
+app.get("/readbynis/:nis", async (req, res) => {
+  const nis = req.params.nis;
+  console.log(nis);
+
+  let sql = "SELECT * FROM perawat Where nis = " + nis + "";
+  let query = conn.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+//route untuk insert data
+app.post("/api", (req, res) => {
+  let action = req.body.action;
+  let data = {
+    nis: req.body.nis,
+    nama_perawat: req.body.nama_perawat,
+    nama_pasien: req.body.nama_pasien
+  };
+  let sql;
+
+  if (action === "Simpan") {
+    sql = "INSERT INTO perawat SET ?";
+  } else {
+    sql =
+      `UPDATE perawat SET nama_perawat='` +
+      req.body.nama_perawat +
+      `', 
+     nama_pasien='` +
+      req.body.nama_pasien +
+      `'
+    WHERE nis='` +
+      req.body.nis +
+      `';`;
+  }
+
+  console.log(sql);
+  let query = conn.query(sql, data, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+    console.log(results);
+  });
+});
+
+//Baca Data Berdasarkan NIS
+app.get("/hapus/:nis", async (req, res) => {
+  const nis = req.params.nis;
+  console.log(nis);
+
+  let sql = `DELETE FROM perawat Where nis = '` + nis + `';`;
   let query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
